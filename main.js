@@ -1,70 +1,105 @@
 class ProductManager {
-    constructor() {
-      this.products = [];
-    }
-  
-    addProduct(product) {
-      // Validar campos obligatorios
-      const requiredFields = ['title', 'description', 'price', 'thumbnail', 'code', 'stock'];
-      const missingFields = requiredFields.filter(field => !product[field]);
-  
-      if (missingFields.length > 0) {
-        throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
-      }
-  
-      // Validar que el código no esté repetido
-      const codeExists = this.products.some(existingProduct => existingProduct.code === product.code);
-      if (codeExists) {
-        throw new Error(`Product with code ${product.code} already exists.`);
-      }
-  
-      // Agregar producto al arreglo
-      this.products.push(product);
-    }
-  
-    getProducts() {
-      return this.products;
-    }
-  
-    getProductById(id) {
-      const product = this.products.find(existingProduct => existingProduct.id === id);
-  
-      if (product) {
-        return product;
-      } else {
-        throw new Error('Product Not Found');
-      }
-    }
+  constructor() {
+    this.products = [];
   }
-  
-  // Ejemplo de uso:
-  const productManager = new ProductManager();
-  
-  try {
-    productManager.addProduct({
-      title: 'Product 1',
-      description: 'Description 1',
-      price: 19.99,
-      thumbnail: 'image1.jpg',
-      code: 'ABC123',
-      stock: 50,
-    });
-  
-    productManager.addProduct({
-      title: 'Product 2',
-      description: 'Description 2',
-      price: 29.99,
-      thumbnail: 'image2.jpg',
-      code: 'XYZ456',
-      stock: 30,
-    });
-  
-    console.log(productManager.getProducts());
-  
-    const productIdToFind = 1;
-    const foundProduct = productManager.getProductById(productIdToFind);
-    console.log(`Product found with ID ${productIdToFind}:`, foundProduct);
-  } catch (error) {
-    console.error(error.message);
+
+  addProduct(product) {
+    if (!product.id || !product.code) {
+      throw new Error("Id and code are required fields.");
+    }
+
+    if (this.products.some((p) => p.id === product.id || p.code === product.code)) {
+      throw new Error("Product with the same id or code already exists.");
+    }
+
+    this.products.push(product);
   }
-  
+
+  getProducts() {
+    return this.products;
+  }
+
+  getProductById(id) {
+    const product = this.products.find((p) => p.id === id);
+
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    return product;
+  }
+
+  updateProduct(id, updatedProduct) {
+    const index = this.products.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      throw new Error("Product not found");
+    }
+
+    // Preserve the original id
+    updatedProduct.id = id;
+
+    // Update the product in the array
+    this.products[index] = updatedProduct;
+  }
+
+  deleteProduct(id) {
+    const index = this.products.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      throw new Error("Product not found");
+    }
+
+    // Remove the product from the array
+    this.products.splice(index, 1);
+  }
+}
+
+// Ejemplo de uso:
+
+const productManager = new ProductManager();
+
+// Agregar productos
+productManager.addProduct({
+  id: "1",
+  title: "Product 1",
+  description: "Description 1",
+  price: 10.99,
+  thumbnail: "url1",
+  code: "ABC123",
+  stock: 50,
+});
+
+productManager.addProduct({
+  id: "2",
+  title: "Product 2",
+  description: "Description 2",
+  price: 19.99,
+  thumbnail: "url2",
+  code: "XYZ456",
+  stock: 30,
+});
+
+// Obtener productos
+const allProducts = productManager.getProducts();
+console.log("All Products:", allProducts);
+
+// Obtener producto por ID
+const productById = productManager.getProductById("1");
+console.log("Product by ID:", productById);
+
+// Actualizar producto
+productManager.updateProduct("1", {
+  title: "Updated Product 1",
+  description: "Updated Description 1",
+  price: 12.99,
+  thumbnail: "updatedUrl1",
+  code: "ABC123", // No se permite cambiar el código
+  stock: 45,
+});
+
+console.log("Updated Products:", productManager.getProducts());
+
+// Eliminar producto
+productManager.deleteProduct("2");
+console.log("Products after deletion:", productManager.getProducts());
