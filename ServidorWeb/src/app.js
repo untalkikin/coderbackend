@@ -22,4 +22,4 @@ app.get("/productos/:id", async(req, res)=>{
     res.json({payload: producto, status: 200})
 });
 
-app.listen(8080, ()=> console.log("El servidor esta corriendo en el purto 8080"));
+app.listen(8080, ()=> console.log("El servidor esta corriendo en el puerto 8080"));
