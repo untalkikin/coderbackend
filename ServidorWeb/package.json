@@ -4,7 +4,8 @@
   "description": "coderhouse desafio",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node src/app.js"
   },
   "author": "Enrique de la Torre",
   "license": "ISC",
