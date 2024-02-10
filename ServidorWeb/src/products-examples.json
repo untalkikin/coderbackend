@@ -1,0 +1,48 @@
+
+[
+    {
+      "title": "Laptop MSI",
+      "description": "La mejor laptop del mercado al mejor precio",
+      "price": 299.99,
+      "thumbnail": "https://www.google.com",
+      "code": "1190B2",
+      "stock": 11,
+      "id": 1
+    },
+    {
+      "title": "Audifonos SONY WH1005000",
+      "description": "La mejor cancelación de sonido que pueda existir",
+      "price": 40.99,
+      "thumbnail": "https://www.google.com",
+      "code": "1190B22",
+      "stock": 12,
+      "id": 2
+    },
+    {
+      "title": "Teclado Cooler Master",
+      "description": "Excelente teclado mecanico",
+      "price": 15,
+      "thumbnail": "https://www.google.com.",
+      "code": "1190C23",
+      "stock": 20,
+      "id": 3
+    },
+    {
+      "title": "Mouse Apple ACTUALIZADO",
+      "description": "Excelente Mouse",
+      "price": 99.2,
+      "thumbnail": "https://www.google.com",
+      "code": "1190E27",
+      "stock": 100,
+      "id": 5
+    },
+    {
+      "title": "Nintendo Switch",
+      "description": "El mejor entretenimiento activo",
+      "price": 200,
+      "thumbnail": "https://www.google.com.ar",
+      "code": "1190E31",
+      "stock": 30,
+      "id": 6
+    }
+  ]

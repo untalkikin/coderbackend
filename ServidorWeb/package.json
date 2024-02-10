@@ -2,7 +2,8 @@
   "name": "servidorweb",
   "version": "1.0.0",
   "description": "coderhouse desafio",
-  "main": "app.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "test",
     "start": "node src/app.js"
